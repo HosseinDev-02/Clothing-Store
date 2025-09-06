@@ -1,25 +1,37 @@
 @font-face {
     font-family: 'VazirMatn Regular';
-    src: url('/fonts/Vazir-Matn/Vazirmatn-Regular.woff2') format('woff2');
+    src: url('/fonts/Vazirmatn/Vazirmatn-Regular.woff2') format('woff2');
     font-weight: 400;
 }
 @font-face {
     font-family: 'VazirMatn Medium';
-    src: url('/fonts/Vazir-Matn/Vazirmatn-Medium.woff2') format('woff2');
+    src: url('/fonts/Vazirmatn/Vazirmatn-Medium.woff2') format('woff2');
     font-weight: 500;
 }
 @font-face {
     font-family: 'VazirMatn Light';
-    src: url('/fonts/Vazir-Matn/Vazirmatn-Light.woff2') format('woff2');
+    src: url('/fonts/Vazirmatn/Vazirmatn-Light.woff2') format('woff2');
     font-weight: 300;
 }
 @font-face {
     font-family: 'VazirMatn Bold';
-    src: url('/fonts/Vazir-Matn/Vazirmatn-Bold.woff2') format('woff2');
+    src: url('/fonts/Vazirmatn/Vazirmatn-Bold.woff2') format('woff2');
     font-weight: 700;
 }
 @font-face {
     font-family: 'VazirMatn SemiBold';
-    src: url('/fonts/Vazir-Matn/Vazirmatn-SemiBold.woff2') format('woff2');
+    src: url('/fonts/Vazirmatn/Vazirmatn-SemiBold.woff2') format('woff2');
     font-weight: 600;
+}
+@font-face {
+    font-family: 'Logo Regular';
+    src: url('/fonts/Logo/BoogieBoysRegular.otf');
+}
+@font-face {
+    font-family: 'Logo Extrude';
+    src: url('/fonts/Logo/BoogieBoysExtrude.otf');
+}
+@font-face {
+    font-family: 'Dana Bold';
+    src: url('/fonts/Dana/Dana-Bold.woff2') format('woff2');
 }
