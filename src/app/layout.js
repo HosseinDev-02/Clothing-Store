@@ -10,7 +10,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html dir="rtl" lang="fa">
-      <body className="font-VazirMatn-Regular text-foreground"
+      <body className="font-VazirMatn-Regular text-foreground min-h-[2000px] h-full"
       >
       <Header/>
         {children}

@@ -1,6 +1,7 @@
+"use client";
 import { categoryItems } from "@/data";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { LuMenu } from "react-icons/lu";
 import { IoMenu } from "react-icons/io5";
 import { Input } from "./ui/input";
@@ -10,32 +11,70 @@ import HeartIcon from "./icons/HeartIcon";
 import StarIcon from "./icons/StarIcon";
 import LightningIcon from "./icons/LightningIcon";
 import AwardIcon from "./icons/AwardIcon";
+import ShoppingBagIcon from "./icons/ShoppingBagIcon";
+import SearchIcon from "./icons/SearchIcon";
 
 function Header() {
+    const [fixedHeader, setFixedHeader] = useState(false);
+
+    useEffect(() => {
+        let scrollTop;
+        window.addEventListener("scroll", () => {
+            scrollTop = document.documentElement.scrollTop;
+            scrollTop > 250 ? setFixedHeader(true) : setFixedHeader(false);
+        });
+        return () => window.removeEventListener("scroll");
+    }, []);
+
     return (
-        <header className="fixed left-0 right-0 top-4 w-4/5 mx-auto bg-gray-50 rounded-2xl border-b border-border flex flex-col px-6 divide-y divide-border">
+        <header
+            className={`transition-all duration-300 mx-auto fixed left-0 right-0 bg-gray-50 border-b-2 border-border flex flex-col px-6 md:divide-y divide-border ${
+                fixedHeader
+                    ? "w-full top-0"
+                    : "md:top-4 w-full md:w-[95%] lg:w-[90%] xl:w-[80] md:rounded-2xl"
+            }`}
+        >
             {/* Top */}
-            <div className="flex justify-between items-center py-4">
+            <div className="flex justify-between items-center py-6 md:py-4">
                 {/* Logo L */}
                 <Link
                     href={"#"}
-                    className="tracking-tighter text-3xl text-primary font-Dana-Bold text-shadow-2xs justify-self-center"
+                    className="text-2xl md:text-3xl text-primary font-Dana-Bold text-shadow-2xs justify-self-center"
                 >
-                    استایل پلاس
+                    استایل&#8202;پلاس
                 </Link>
+                {/* Search Bar */}
                 <Input
-                    className="font-VazirMatn-Medium text-sm max-w-xs w-full h-10 rounded-xl focus-visible:ring-0 transition-all duration-300"
+                    className="hidden md:inline font-VazirMatn-Medium text-sm max-w-xs w-full h-10 rounded-xl focus-visible:ring-0 transition-all duration-300"
                     placeholder="جستجو کنید ..."
                     type="text"
                 />
+                {/* Mobile Header Icons */}
+                <div className="flex md:hidden items-end gap-2">
+                    <Link
+                        className=""
+                        href={"#"}
+                    >
+                        <SearchIcon width={24} height={24} />
+                    </Link>
+                    <Link className="w-7.5 h-7.5 flex items-end justify-center relative shrink-0" href={"#"}>
+                        <ShoppingBagIcon width={24} height={24} />
+                        <span className="absolute -left-1.5 -top-1.5 bg-red-400 text-xs font-VazirMatn-Medium rounded-full h-5 w-5 flex items-center justify-center">
+                            4
+                        </span>
+                    </Link>
+                </div>
             </div>
             {/* Button */}
-            <div className="flex items-center justify-between py-4">
+            <div className="hidden md:flex items-center justify-between py-4">
                 <div className="flex items-center gap-2">
                     {/* Menu Desktop */}
-                    <ul className="flex items-center gap-4 text-sm lg:text-base">
-                        <li className="group/store">
-                            <Link className="flex items-center gap-1 font-VazirMatn-Medium primary-link" href="#">
+                    <div className="text-sm lg:text-base">
+                        <div className="group/store">
+                            <Link
+                                className="flex items-center gap-1 font-VazirMatn-Medium primary-link"
+                                href="#"
+                            >
                                 <IoMenu size={24} />
                                 <span>دسته بندی ها</span>
                             </Link>
@@ -111,26 +150,32 @@ function Header() {
                                     </ul>
                                 </div>
                             </div>
-                        </li>
-                        <li>
-                            <Link className="flex items-center gap-1 font-VazirMatn-Medium primary-link" href="#">
-                                <StarIcon width={20} height={20} />
-                                <span>جدیدترین محصولات</span>
-                            </Link>
-                        </li>
-                        <li>
-                            <Link className="flex items-center gap-1 font-VazirMatn-Medium primary-link" href="#">
-                                <LightningIcon width={20} height={20} />
-                                <span>تخفیفات ویژه</span>
-                            </Link>
-                        </li>
-                        <li>
-                            <Link className="flex items-center gap-1 font-VazirMatn-Medium primary-link" href="#">
-                                <AwardIcon width={20} height={20} />
-                                <span>پرفروش ترین ها</span>
-                            </Link>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
+                    {/* Special Links */}
+                    <div className="flex items-center gap-2 text-sm lg:text-base">
+                        <Link
+                            className="flex items-center gap-1 font-VazirMatn-Medium primary-link"
+                            href="#"
+                        >
+                            <StarIcon width={20} height={20} />
+                            <span>جدیدترین محصولات</span>
+                        </Link>
+                        <Link
+                            className="flex items-center gap-1 font-VazirMatn-Medium primary-link"
+                            href="#"
+                        >
+                            <LightningIcon width={20} height={20} />
+                            <span>تخفیفات ویژه</span>
+                        </Link>
+                        <Link
+                            className="flex items-center gap-1 font-VazirMatn-Medium primary-link"
+                            href="#"
+                        >
+                            <AwardIcon width={20} height={20} />
+                            <span>پرفروش ترین ها</span>
+                        </Link>
+                    </div>
                 </div>
                 {/* Icons */}
                 <div className="flex items-center justify-end gap-2">
