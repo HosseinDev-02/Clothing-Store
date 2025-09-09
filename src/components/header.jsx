@@ -24,6 +24,7 @@ import { Button } from "./ui/button";
 import CrossIcon from "./icons/CrossIcon";
 import { ChevronDown, ChevronLeft, XIcon } from "lucide-react";
 import MenuItem from "./MenuItem/MenuItem";
+import Overlay from "./Overlay/Overlay";
 
 const mobileMenuLinks = [
     {
@@ -68,6 +69,7 @@ const setUserMenuItemIcon = (title) => {
 function Header() {
     const [fixedHeader, setFixedHeader] = useState(false);
     const [activeLink, setActiveLink] = useState("دسته بندی");
+    const [openMobileMenu, setOpenMobileMenu] = useState(false)
 
     useEffect(() => {
         let scrollTop;
@@ -344,7 +346,9 @@ function Header() {
                     {mobileMenuLinks.map((link) => {
                         const Icon = setMobileMenuLinkIcons(link.title);
                         return (
-                            <li className="" key={link.id}>
+                            <li onClick={() => {
+                                link.title && setOpenMobileMenu(true)
+                            }} className="" key={link.id}>
                                 <Link
                                     className={`flex flex-col items-center gap-1 ${
                                         activeLink === link.title &&
@@ -373,7 +377,7 @@ function Header() {
                 </ul>
             </div>
             {/* Mobile Menu Items Wrapper */}
-            <div className="fixed block md:hidden right-0 top-0 bottom-0 w-64 bg-secondary border-l border-border p-4 overflow-y-auto">
+            <div className={`fixed block md:hidden z-50 top-0 bottom-0 w-64 bg-secondary border-l border-border p-4 overflow-y-auto transition-all duration-300 ${openMobileMenu ? 'right-0' : '-right-64'}`}>
                 {/* Header */}
                 <div className="flex items-center justify-between pb-4 border-b border-border">
                     {/* Logo */}
@@ -382,6 +386,7 @@ function Header() {
                     </h6>
                     {/* Close Menu Btn */}
                     <Button
+                    onClick={() => setOpenMobileMenu(false)}
                         className="size-6"
                         variant="destructive"
                         size={"icon"}
@@ -398,6 +403,8 @@ function Header() {
                     </ul>
                 </div>
             </div>
+
+            <Overlay className='block md:hidden' show={openMobileMenu} setShow={setOpenMobileMenu}/>
         </>
     );
 }
